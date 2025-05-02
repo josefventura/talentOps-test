@@ -1,8 +1,8 @@
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './http-exception';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,7 +16,11 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('document', app, document);
+  SwaggerModule.setup('document', app, document, {
+    jsonDocumentUrl: 'api/v1/document-json',
+    yamlDocumentUrl: 'api/v1/document-yaml',
+    customSiteTitle: 'Heroes API',
+  });
   app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()}`);

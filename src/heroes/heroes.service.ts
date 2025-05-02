@@ -10,6 +10,7 @@ export class HeroesService {
         const heroesList = heroes;
         return heroesList.map((hero) => {
             return {
+                id: hero.id,
                 heroNameCode: hero.heroNameCode,
                 superPower: hero.superPower
             };
@@ -20,6 +21,7 @@ export class HeroesService {
         const heroesList = heroes;
         return heroesList.filter((hero) => hero.id === id).map((hero) => {
             return {
+                    id: hero.id,
                     heroNameCode: hero.heroNameCode,
                     superPower: hero.superPower
                 };
@@ -36,7 +38,8 @@ export class HeroesService {
         };
         const heroesList = heroes;
         heroesList.push(newHero);
-        fs.writeFileSync(path.join(__dirname, 'json dummy/heroe-list.json'), JSON.stringify(heroesList, null, 2)); 
+        const filePath = path.join(__dirname, 'json dummy/heroe-list.json');
+        fs.writeFileSync(filePath,`export const heroes = ${JSON.stringify(heroesList, null, 2)}\n`); 
         return newHero;
 
     }   
@@ -47,7 +50,8 @@ export class HeroesService {
         if (heroIndex !== -1) {
             const updatedHero = { ...heroesList[heroIndex], ...updateHero };
             heroesList[heroIndex] = updatedHero;
-            fs.writeFileSync(path.join(__dirname, 'json dummy/heroe-list.json'), JSON.stringify(heroesList, null, 2)); 
+            const filePath = path.join(__dirname, 'json dummy/heroe-list.json');
+            fs.writeFileSync(filePath,`export const heroes = ${JSON.stringify(heroesList, null, 2)}\n`); 
             return updatedHero;
         } else {
             throw new Error('Hero not found');
@@ -59,7 +63,8 @@ export class HeroesService {
         const heroIndex = heroesList.findIndex((hero) => hero.id === id);
         if (heroIndex !== -1) {
             heroesList.splice(heroIndex, 1);
-            fs.writeFileSync(path.join(__dirname, 'json dummy/heroe-list.json'), JSON.stringify(heroesList, null, 2)); 
+            const filePath = path.join(__dirname, 'json dummy/heroe-list.json');    
+            fs.writeFileSync(filePath, `export const heroes = ${JSON.stringify(heroesList, null, 2)}\n`); 
             return true;
         } else {
             throw new Error('Hero not found');

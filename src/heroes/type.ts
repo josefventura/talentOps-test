@@ -6,6 +6,7 @@ export interface Hero {
 }
 
 export interface HeroResponse {
+    id: string
     heroNameCode: string;
     superPower: string;
 }
