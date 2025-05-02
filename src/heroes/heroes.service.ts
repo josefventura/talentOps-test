@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { heroes } from "./json dummy/heroe-list";
 import { Hero, HeroCreate, HeroResponse, HeroUpdate } from "./type";
 import * as fs from 'fs';
